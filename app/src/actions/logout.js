@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import { deleteItem } from "../helpers";
+import { toast } from "react-toastify";
 
 export async function logoutAction(){
     //delete user
@@ -7,6 +8,8 @@ export async function logoutAction(){
         key: "userName"
     })
 
+    //Notification
+    toast.success("You've deleted your account")
 
     //return redirect
     return redirect("/")
