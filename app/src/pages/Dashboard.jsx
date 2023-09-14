@@ -3,11 +3,13 @@ import { fetchData } from '../helpers'
 import { useLoaderData } from 'react-router-dom';
 import Intro from '../components/Intro';
 import { toast } from 'react-toastify';
+import AddBugetForm from '../components/AddBudgetForm';
 
 //Loader
 export function dashboardLoader(){
     const userName = fetchData("userName");
-    return { userName }
+    const budgets = fetchData("budgets");
+    return { userName, budgets }
 }
 
 //Action
@@ -23,10 +25,22 @@ export async function dashboardAction({request}){
 }
 
 const Dashboard = () => {
-    const { userName } = useLoaderData()
+    const { userName, budgets } = useLoaderData()
     return (
         <>
-            {userName ? (<p>{userName}</p>) : <Intro /> }
+            {userName ? (
+            <div className="dashboard">
+                <h1>Welcome back, <span className="accent">{userName}</span></h1>
+                <div className="grid-sm">
+                    {/* {budgets ? () : ()} */}
+                    <div className="grid-lg">
+                        <div className="flex-lg">
+                            <AddBugetForm />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ) : <Intro /> }
         </>
     )
 }
