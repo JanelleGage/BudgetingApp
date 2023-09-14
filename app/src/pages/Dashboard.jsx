@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBudget, fetchData } from '../helpers'
+import { createBudget, fetchData, waait } from '../helpers'
 import { useLoaderData } from 'react-router-dom';
 import Intro from '../components/Intro';
 import { toast } from 'react-toastify';
@@ -14,6 +14,8 @@ export function dashboardLoader(){
 
 //Action
 export async function dashboardAction({request}){
+    await waait()
+
     const data = await request.formData()
     const {_action, ...values} = Object.fromEntries(data)
 
@@ -34,8 +36,6 @@ export async function dashboardAction({request}){
                 name: values.newBudget,
                 amount: values.newBudgetAmount,
             })
-            
-
             return toast.success("Budget created")
         } catch (e) {
             throw new Error("There was a problem creating your budget")
