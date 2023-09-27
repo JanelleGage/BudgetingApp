@@ -40,3 +40,30 @@ export const createExpense = ({ name, amount, budgetId }) => {
     JSON.stringify([...existingExpenses, newItem]))
 }
 
+//Total spent
+export const calculateSpentByBudget = (budgetId) => {
+  const expenses = fetchData("expenses") ?? [];
+  const budgetSpent = expenses.reduce((acc, expense) => {
+    // check
+    if (expense.budgetId !== budgetId) return acc
+
+    // add the current amount to total
+    return acc += expense.amount
+  }, 0)
+  return budgetSpent;
+}
+
+
+export const formatCurrency = (amt) => {
+  return amt.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD"
+  })
+}
+
+export const formatPercentage = (amt) => {
+  return amt.toLocaleString(undefined, {
+    style: "percent",
+    minimumFractionDigits: 0,
+  })
+}
