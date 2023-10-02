@@ -4,7 +4,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import Intro from '../components/Intro';
 import { toast } from 'react-toastify';
 import AddBugetForm from '../components/AddBudgetForm';
-import AddExpenseFrom from '../components/AddExpenseFrom';
+import AddExpenseFrom from '../components/AddExpenseForm';
 import BudgetItem from '../components/BudgetItem';
 import Table from '../components/Table';
 
